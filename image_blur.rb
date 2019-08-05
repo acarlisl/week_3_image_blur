@@ -9,6 +9,8 @@ by Andrew Carlisle
 # An array representation of a black and white image consisting
 #  of 1's and 0's.
 class Image
+  attr_reader :image_array
+
   # Initializer takes a pre-constructed 2D array
   # The argument is assumed to be a 2D array with the following properies:
   #   * The array has uniform-length rows (all sub-arrays are the same length)
@@ -46,8 +48,19 @@ class Image
       puts
     end
   end
+
+  # Returns a new Image where all values adjacent to a '1' in the original
+  #  array are also 1
+  def blur
+    Image.new(1)
+  end
 end
 
+
+
+
+=begin
+#### Used for testing in part 1 ####
 image = Image.new([
   [0, 0, 0, 0],
   [0, 1, 0, 0],
@@ -55,3 +68,13 @@ image = Image.new([
   [0, 0, 0, 0]
 ])
 image.output_image
+
+image = Image.new([
+  [0, 0, 0, 0],
+  [0, 1, 0, 0],
+  [0, 0, 0, 1],
+  [0, 0, 0, 0]
+])
+
+puts image.image_array.inspect
+=end
