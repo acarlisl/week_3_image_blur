@@ -48,11 +48,42 @@ class TestCreateImage < Test::Unit::TestCase
     ###########################################################################
     # Returns true if the element at (row, column) in image_array has a 1
     #  at any other index orthogonally adjacent (up, right, left or down)
+    # Also returns true if the element itself is a 1
     # Raises an error if the passed arguments are not valid (if they are out)
     #  of bounds for image_array)
     def has_neighbor?(row, column)
       raise 'Checking for neighbor: index out of bounds' \
       unless self.is_valid_index?(row, column)
+      
+      # Check for a 1 at this position
+      if @image_array[row][column] == 1
+        return true
+      end
+      
+      # Check for a 1 at adjacent indexes. Ignore invalid indexes
+      if is_valid_index?(row - 1, column)
+        if @image_array[row - 1][column] == 1
+          return true
+        end
+      end 
+      if is_valid_index?(row + 1, column)
+        if @image_array[row + 1][column] == 1
+          return true
+        end
+      end
+      if is_valid_index?(row, column - 1)
+        if @image_array[row][column - 1] == 1
+          return true
+        end
+      end
+      if is_valid_index?(row, column + 1)
+        if @image_array[row][column + 1] == 1
+          return true
+        end
+      end
+      
+      # No neighbor found
+      false
     end
     ###########################################################################
     ######################### END COPY/PASTE ##################################
@@ -120,7 +151,164 @@ class TestCreateImage < Test::Unit::TestCase
     assert( !(is_valid_index?(-1, -1)) )
   end
 
-  def test_has_neighbor
+  def test_has_neighbor_error
+    @image_array = [
+      [0, 0, 0, 0],
+      [0, 1, 0, 0],
+      [0, 0, 0, 1],
+      [0, 0, 0, 0]
+    ]
     
+    # Testing Exception when index out of bounds
+    assert_raise( RuntimeError ) {has_neighbor?(0, 4)}
+    assert_raise( RuntimeError ) {has_neighbor?(4, 1)}
+    assert_raise( RuntimeError ) {has_neighbor?(5, 5)}
+    assert_raise( RuntimeError ) {has_neighbor?(-1, 1)}
+    assert_raise( RuntimeError ) {has_neighbor?(3, -2)}
+    
+    assert_nothing_raised( RuntimeError ) {has_neighbor?(3, 0)}
+    assert_nothing_raised( RuntimeError ) {has_neighbor?(0, 0)}
+    assert_nothing_raised( RuntimeError ) {has_neighbor?(3, 3)}
+    assert_nothing_raised( RuntimeError ) {has_neighbor?(2, 1)}
+  end
+  
+  def test_has_neighbor
+    @image_array = [
+      [0, 0, 0, 0],
+      [0, 1, 0, 0],
+      [0, 0, 0, 1],
+      [0, 0, 0, 0]
+    ]
+    assert( !(has_neighbor?(0, 0)) )
+    assert( has_neighbor?(0, 1) )
+    assert( !(has_neighbor?(0, 2)) )
+    assert( !(has_neighbor?(0, 3)) )
+    assert( has_neighbor?(1, 0) )
+    assert( has_neighbor?(1, 1) )
+    assert( has_neighbor?(1, 2) )
+    assert( has_neighbor?(1, 3) )
+    assert( !(has_neighbor?(2, 0)) )
+    assert( has_neighbor?(2, 1) )
+    assert( has_neighbor?(2, 2) )
+    assert( has_neighbor?(2, 3) )
+    assert( !(has_neighbor?(3, 0)) )
+    assert( !(has_neighbor?(3, 1)) )
+    assert( !(has_neighbor?(3, 2)) )
+    assert( has_neighbor?(3, 3) )
+    
+    @image_array = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0]
+    ]
+    assert( !(has_neighbor?(0, 0)) )
+    assert( !(has_neighbor?(0, 1)) )
+    assert( !(has_neighbor?(0, 2)) )
+    assert( !(has_neighbor?(0, 3)) )
+    assert( !(has_neighbor?(1, 0)) )
+    assert( !(has_neighbor?(1, 1)) )
+    assert( !(has_neighbor?(1, 2)) )
+    assert( !(has_neighbor?(1, 3)) )
+    assert( !(has_neighbor?(2, 0)) )
+    assert( !(has_neighbor?(2, 1)) )
+    assert( !(has_neighbor?(2, 2)) )
+    assert( !(has_neighbor?(2, 3)) )
+    assert( !(has_neighbor?(3, 0)) )
+    assert( !(has_neighbor?(3, 1)) )
+    assert( !(has_neighbor?(3, 2)) )
+    assert( !(has_neighbor?(3, 3)) )
+    
+    @image_array = [
+      [1, 1, 1, 1],
+      [1, 1, 1, 1],
+      [1, 1, 1, 1],
+      [1, 1, 1, 1]
+    ]
+    assert( has_neighbor?(0, 0) )
+    assert( has_neighbor?(0, 1) )
+    assert( has_neighbor?(0, 2) )
+    assert( has_neighbor?(0, 3) )
+    assert( has_neighbor?(1, 0) )
+    assert( has_neighbor?(1, 1) )
+    assert( has_neighbor?(1, 2) )
+    assert( has_neighbor?(1, 3) )
+    assert( has_neighbor?(2, 0) )
+    assert( has_neighbor?(2, 1) )
+    assert( has_neighbor?(2, 2) )
+    assert( has_neighbor?(2, 3) )
+    assert( has_neighbor?(3, 0) )
+    assert( has_neighbor?(3, 1) )
+    assert( has_neighbor?(3, 2) )
+    assert( has_neighbor?(3, 3) )
+    
+    @image_array = [
+      [0, 1, 0, 1],
+      [1, 0, 1, 0],
+      [0, 1, 0, 1],
+      [1, 0, 1, 0]
+    ]
+    assert( has_neighbor?(0, 0) )
+    assert( has_neighbor?(0, 1) )
+    assert( has_neighbor?(0, 2) )
+    assert( has_neighbor?(0, 3) )
+    assert( has_neighbor?(1, 0) )
+    assert( has_neighbor?(1, 1) )
+    assert( has_neighbor?(1, 2) )
+    assert( has_neighbor?(1, 3) )
+    assert( has_neighbor?(2, 0) )
+    assert( has_neighbor?(2, 1) )
+    assert( has_neighbor?(2, 2) )
+    assert( has_neighbor?(2, 3) )
+    assert( has_neighbor?(3, 0) )
+    assert( has_neighbor?(3, 1) )
+    assert( has_neighbor?(3, 2) )
+    assert( has_neighbor?(3, 3) )
+    
+    @image_array = [
+      [1, 0, 0, 1],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [1, 0, 0, 1]
+    ]
+    assert( has_neighbor?(0, 0) )
+    assert( has_neighbor?(0, 1) )
+    assert( has_neighbor?(0, 2) )
+    assert( has_neighbor?(0, 3) )
+    assert( has_neighbor?(1, 0) )
+    assert( !(has_neighbor?(1, 1)) )
+    assert( !(has_neighbor?(1, 2)) )
+    assert( has_neighbor?(1, 3) )
+    assert( has_neighbor?(2, 0) )
+    assert( !(has_neighbor?(2, 1)) )
+    assert( !(has_neighbor?(2, 2)) )
+    assert( has_neighbor?(2, 3) )
+    assert( has_neighbor?(3, 0) )
+    assert( has_neighbor?(3, 1) )
+    assert( has_neighbor?(3, 2) )
+    assert( has_neighbor?(3, 3) )
+    
+    @image_array = [
+      [1, 1, 0, 1],
+      [1, 0, 0, 0],
+      [0, 0, 0, 0],
+      [1, 0, 0, 0]
+    ]
+    assert( has_neighbor?(0, 0) )
+    assert( has_neighbor?(0, 1) )
+    assert( has_neighbor?(0, 2) )
+    assert( has_neighbor?(0, 3) )
+    assert( has_neighbor?(1, 0) )
+    assert( has_neighbor?(1, 1) )
+    assert( !(has_neighbor?(1, 2)) )
+    assert( has_neighbor?(1, 3) )
+    assert( has_neighbor?(2, 0) )
+    assert( !(has_neighbor?(2, 1)) )
+    assert( !(has_neighbor?(2, 2)) )
+    assert( !(has_neighbor?(2, 3)) )
+    assert( has_neighbor?(3, 0) )
+    assert( has_neighbor?(3, 1) )
+    assert( !(has_neighbor?(3, 2)) )
+    assert( !(has_neighbor?(3, 3)) )
   end
 end
