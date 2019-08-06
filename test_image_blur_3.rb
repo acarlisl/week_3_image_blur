@@ -130,6 +130,27 @@ class TestCreateImage < Test::Unit::TestCase
       [0, 1, 1, 1, 0],
       [0, 0, 1, 0, 0]
     ]
+    @image_5_a_blurred_2 = [
+      [1, 1, 0, 0, 0],
+      [1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1],
+      [0, 1, 1, 1, 0]
+    ]
+    @image_5_a_blurred_3 = [
+      [1, 1, 1, 0, 0],
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1]
+    ]
+    @image_5_a_blurred_4 = [
+      [1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1]
+    ]
   end
 
   def test_blur_distance
@@ -180,5 +201,15 @@ class TestCreateImage < Test::Unit::TestCase
     assert_equal( @image_5.blur(4).image_array, @image_5_1_blurred )
     assert_equal( @image_5.blur(7).image_array, @image_5_1_blurred )
     assert_equal( @image_5.blur(20).image_array, @image_5_1_blurred )
+    
+    assert_equal( @image_5_a.blur(0).image_array, @image_5_a.image_array )
+    assert_equal( @image_5_a.blur(1).image_array, @image_5_a_blurred_1 )
+    assert_equal( @image_5_a.blur(2).image_array, @image_5_a_blurred_2 )
+    assert_equal( @image_5_a.blur(3).image_array, @image_5_a_blurred_3 )
+    assert_equal( @image_5_a.blur(4).image_array, @image_5_a_blurred_4 )
+    assert_equal( @image_5_a.blur(5).image_array, @image_5_1_blurred )
+    assert_equal( @image_5_a.blur(7).image_array, @image_5_1_blurred )
+    
+    
   end
 end
