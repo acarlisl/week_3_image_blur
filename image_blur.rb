@@ -54,6 +54,34 @@ class Image
   def blur
     Image.new(1)
   end
+
+
+  private
+
+  # Returns true if the element at (row, column) in image_array has a 1
+  #  at any other index orthogonally adjacent (up, right, left or down)
+  # Raises an error if the passed arguments are not valid (if they are out)
+  #  of bounds for image_array)
+  def has_neighbor?(row, column)
+    raise 'Checking for neighbor: index out of bounds'
+      unless self.is_valid_index?(row, column)
+  end
+
+  # Returns true if the 2D array index is within the boundaries of
+  #  @image_array and false outherwise
+  def is_valid_index?(row, column)
+    # Check if the specified row is out of bounds
+    if ( row < 0 ) || ( row >= @image_array.length )
+      return false
+    end
+
+    # Check if the specified column is out of bounds
+    if ( column < 0 ) || ( column >= @image_array[row].length )
+      return false
+    end
+
+    return true
+  end
 end
 
 

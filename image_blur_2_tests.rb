@@ -194,6 +194,19 @@ class TestCreateImage < Test::Unit::TestCase
   # Tests for the transform method
   def test_blur
     assert_equal( @image_1.blur.image_array, @image_transformed_1 )
+    assert_equal( @image_2.blur.image_array, @image_transformed_2 )
+    assert_equal( @image_3.blur.image_array, @image_transformed_3 )
+    assert_equal( @image_4.blur.image_array, @image_transformed_4 )
+    assert_equal( @image_5.blur.image_array, @image_transformed_5 )
+    assert_equal( @image_6.blur.image_array, @image_transformed_6 )
+    assert_equal( @image_7.blur.image_array, @image_transformed_7 )
+    assert_equal( @image_8.blur.image_array, @image_transformed_8 )
+    assert_equal( @image_9.blur.image_array, @image_transformed_9 )
+    assert_equal( @image_10.blur.image_array, @image_transformed_10 )
+    assert_equal( @image_11.blur.image_array, @image_transformed_11 )
+    assert_equal( @image_12.blur.image_array, @image_transformed_12 )
+    assert_equal( @image_13.blur.image_array, @image_transformed_13 )
+    assert_equal( @image_14.blur.image_array, @image_transformed_14 )
   end
   
  
