@@ -52,7 +52,25 @@ class Image
   # Returns a new Image where all values adjacent to a '1' in the original
   #  array are also 1
   def blur
-    Image.new(1)
+    # Check for an empty array
+    if @image_array.empty?
+      return []
+    end
+    
+    new_array = Array.new(@image_array.length) \
+      {Array.new(@image_array[0].length)}
+    
+    @image_array.each_index do |row|
+      @image_array[row].each_index do |column|
+        if has_neighbor?(row, column)
+          new_array[row][column] = 1
+        else
+          new_array[row][column] = 0
+        end
+      end
+    end
+    
+    return Image.new(new_array)
   end
 
 
@@ -65,7 +83,7 @@ class Image
     #  of bounds for image_array)
   def has_neighbor?(row, column)
     raise 'Checking for neighbor: index out of bounds' \
-    unless self.is_valid_index?(row, column)
+    unless is_valid_index?(row, column)
     
     # Check for a 1 at this position
     if @image_array[row][column] == 1
