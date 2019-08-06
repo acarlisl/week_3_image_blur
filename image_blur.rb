@@ -51,7 +51,7 @@ class Image
 
   # Returns a new Image where all values adjacent to a '1' in the original
   #  array are also 1
-  def blur
+  def blur_1
     # Check for an empty array
     if @image_array.empty?
       return []

@@ -2,7 +2,7 @@
   
 Testing for week 3 coding challeneg "Image Blur: part 2"
 
-Tests for the method "blur" for class Image
+Tests for the method "blur_1" for class Image
 
 by Andrew Carlisle
   
@@ -191,22 +191,22 @@ class TestCreateImage < Test::Unit::TestCase
     assert_equal( @image_1_array, @image_1.image_array )
   end
 
-  # Tests for the transform method
-  def test_blur
-    assert_equal( @image_1.blur.image_array, @image_transformed_1 )
-    assert_equal( @image_2.blur.image_array, @image_transformed_2 )
-    assert_equal( @image_3.blur.image_array, @image_transformed_3 )
-    assert_equal( @image_4.blur.image_array, @image_transformed_4 )
-    assert_equal( @image_5.blur.image_array, @image_transformed_5 )
-    assert_equal( @image_6.blur.image_array, @image_transformed_6 )
-    assert_equal( @image_7.blur.image_array, @image_transformed_7 )
-    assert_equal( @image_8.blur.image_array, @image_transformed_8 )
-    assert_equal( @image_9.blur.image_array, @image_transformed_9 )
-    assert_equal( @image_10.blur.image_array, @image_transformed_10 )
-    assert_equal( @image_11.blur.image_array, @image_transformed_11 )
-    assert_equal( @image_12.blur.image_array, @image_transformed_12 )
-    assert_equal( @image_13.blur.image_array, @image_transformed_13 )
-    assert_equal( @image_14.blur.image_array, @image_transformed_14 )
+  # Tests for the blur_1 method
+  def test_blur_1
+    assert_equal( @image_1.blur_1.image_array, @image_transformed_1 )
+    assert_equal( @image_2.blur_1.image_array, @image_transformed_2 )
+    assert_equal( @image_3.blur_1.image_array, @image_transformed_3 )
+    assert_equal( @image_4.blur_1.image_array, @image_transformed_4 )
+    assert_equal( @image_5.blur_1.image_array, @image_transformed_5 )
+    assert_equal( @image_6.blur_1.image_array, @image_transformed_6 )
+    assert_equal( @image_7.blur_1.image_array, @image_transformed_7 )
+    assert_equal( @image_8.blur_1.image_array, @image_transformed_8 )
+    assert_equal( @image_9.blur_1.image_array, @image_transformed_9 )
+    assert_equal( @image_10.blur_1.image_array, @image_transformed_10 )
+    assert_equal( @image_11.blur_1.image_array, @image_transformed_11 )
+    assert_equal( @image_12.blur_1.image_array, @image_transformed_12 )
+    assert_equal( @image_13.blur_1.image_array, @image_transformed_13 )
+    assert_equal( @image_14.blur_1.image_array, @image_transformed_14 )
   end
   
  
