@@ -51,6 +51,8 @@ class Image
 
   # Returns a new Image where all values adjacent to a '1' in the original
   #  array are also 1
+  # Equivalent to blur(1). Keeping this method just to show my work from
+  #  phase 2
   def blur_1
     # Check for an empty array
     if @image_array.empty?
@@ -58,7 +60,7 @@ class Image
     end
     
     new_array = Array.new(@image_array.length) \
-      {Array.new(@image_array[0].length)}
+    {Array.new(@image_array[0].length)}
     
     @image_array.each_index do |row|
       @image_array[row].each_index do |column|
@@ -73,17 +75,38 @@ class Image
     return Image.new(new_array)
   end
 
+  # Returns a new Image where all values within the specified manhattan
+  #  distance of a 1 are also a 1
+  def blur(distance)
+    new_array = Array.new(@image_array.length) \
+    {Array.new(@image_array[0].length)}
+
+    @image_array.each_index do |row|
+      @image_array[row].each_index do |column|
+        if within_manhattan(row, column, distance)
+          new_array[row][column] = 1
+        else
+          new_array[row][column] = 0
+        end
+      end
+    end
+
+    return Image.new(new_array)
+  end
+
 
   private
 
   # Returns true if the element at (row, column) in image_array has a 1
-    #  at any other index orthogonally adjacent (up, right, left or down)
-    # Also returns true if the element itself is a 1
-    # Raises an error if the passed arguments are not valid (if they are out)
-    #  of bounds for image_array)
+  #  at any other index orthogonally adjacent (up, right, left or down)
+  # Also returns true if the element itself is a 1
+  # Raises an error if the passed arguments are not valid (if they are out)
+  #  of bounds for image_array)
+  # Equivalent to within_manhattan(row, column, 1). Keeping this method just
+  #  to show my work from phase 2
   def has_neighbor?(row, column)
     raise 'Checking for neighbor: index out of bounds' \
-    unless is_valid_index?(row, column)
+      unless is_valid_index?(row, column)
     
     # Check for a 1 at this position
     if @image_array[row][column] == 1
@@ -130,6 +153,26 @@ class Image
     end
 
     return true
+  end
+
+  # Returns true if the element at (row, column) in image_array has a 1
+  #  within the specified manhattan distance of itself.
+  # Also returns true if the element itself is a 1
+  # Raises an error if the passed arguments are not valid (if they are out)
+  #  of bounds for image_array)
+  def within_manhattan(row, column, distance)
+    raise 'Checking manhattan distance: index out of bounds' \
+      unless is_valid_index?(row, column)
+    
+    # Check for a 1 at this position
+    if @image_array[row][column] == 1
+      return true
+    end
+
+    # Check for a 1 within distance. Ignore invalid indexes
+
+    # No 1 within distance found
+    false
   end
 end
 
