@@ -377,7 +377,7 @@ class TestCreateImage < Test::Unit::TestCase
       [1],
       [1],
     ]
-    @image_13x1_a_blurred_3 = [
+    @image_13x1_a_blurred_4 = [
       [1],
       [1],
       [1],
@@ -506,6 +506,6 @@ class TestCreateImage < Test::Unit::TestCase
     assert_equal( @image_13x1_a.blur(1).image_array, @image_13x1_a_blurred_1 )
     assert_equal( @image_13x1_a.blur(2).image_array, @image_13x1_a_blurred_2 )
     assert_equal( @image_13x1_a.blur(3).image_array, @image_13x1_a_blurred_3 )
-    assert_equal( @image_13x1_a.blur(4).image_array, @image_13x1_a_blurred_3 )
+    assert_equal( @image_13x1_a.blur(4).image_array, @image_13x1_a_blurred_4 )
   end
 end

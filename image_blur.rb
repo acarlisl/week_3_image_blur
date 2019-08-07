@@ -170,6 +170,17 @@ class Image
     end
 
     # Check for a 1 within distance. Ignore invalid indexes
+    (-(distance)..distance).each do |offset|
+      current_row = row + offset
+      column_offset = (distance - offset.abs)
+      ((column - column_offset)..(column + column_offset)).each do |current_column|
+        if is_valid_index?(current_row, current_column)
+          if @image_array[current_row][current_column] == 1
+            return true
+          end
+        end
+      end
+    end
 
     # No 1 within distance found
     false
